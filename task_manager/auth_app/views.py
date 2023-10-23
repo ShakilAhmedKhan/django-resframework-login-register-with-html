@@ -33,4 +33,4 @@ def user_logout(request):
     return redirect('index')
 
 def index(request):
-    return render(request, 'home.html')
+    return render(request, 'index.html')

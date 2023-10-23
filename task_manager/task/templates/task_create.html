@@ -1,0 +1,11 @@
+<!-- task_create.html (Task Creation Template) -->
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Create Task</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Create Task</button>
+    </form>
+{% endblock %}

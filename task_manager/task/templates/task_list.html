@@ -3,9 +3,43 @@
 
 {% block content %}
     <h2>Task List</h2>
-    <ul>
-        {% for task in tasks %}
-            <li><a href="{% url 'task_details' task.id %}">{{ task.title }}</a></li>
-        {% endfor %}
-    </ul>
+<!--    <ul>-->
+<!--        {% for task in tasks %}-->
+<!--            <li><a href="{% url 'task_details' task.id %}">{{ task.title }}</a></li>-->
+<!--        {% endfor %}-->
+<!--    </ul>-->
+
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Task</th>
+      <th scope="col">Due Date</th>
+      <th scope="col">Priority</th>
+      <th scope="col">Image</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for task in tasks %}
+
+
+    <tr>
+
+
+
+      <th><a href="{% url 'task_details' task.id %}">{{ task.id }}</a>
+      <th scope="row"> {{ task.title }} </th>
+      <td colspan="2">{{ task.due_date }}</td>
+      <td>{{ task.priority }}</td>
+      <td>{{ task.priority }}</td>
+      <td>
+      {% if task.image %}
+        <img src="{{ task.image.url }}" alt="{{ task.title }}">
+      {% endif %}
+      </td>
+    </tr>
+   {% endfor %}
+  </tbody>
+</table>
 {% endblock %}

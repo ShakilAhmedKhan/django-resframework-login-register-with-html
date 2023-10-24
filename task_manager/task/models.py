@@ -9,7 +9,8 @@ class Task(models.Model):
     due_date = models.DateField()
     priority = models.IntegerField()
     completed = models.BooleanField(default=False)
-    image = models.ImageField(upload_to='task_images/')
+    # image = models.ImageField(upload_to='task_images/')
+    image = models.ImageField(upload_to='task_images/', default='default_image.jpg')
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
 

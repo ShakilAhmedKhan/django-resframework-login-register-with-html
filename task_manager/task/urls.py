@@ -5,8 +5,6 @@ from .views import TaskListView, TaskCreateView , TaskListView, TaskCreateView, 
 from .api import TaskListCreateAPI, TaskRetrieveUpdateDeleteAPI
 
 urlpatterns = [
-    path('tasks/', TaskListView.as_view(), name='task_list'),
-    path('tasks/create/', TaskCreateView.as_view(), name='task_create'),
     path('api/tasks/', TaskListCreateAPI.as_view(), name='api_task_list_create'),
     path('api/tasks/<int:pk>/', TaskRetrieveUpdateDeleteAPI.as_view(), name='api_task_retrieve_update_delete'),
     path('tasks/', TaskListView.as_view(), name='task_list'),

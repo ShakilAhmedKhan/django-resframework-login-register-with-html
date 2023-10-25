@@ -3,8 +3,8 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.views import View
 from django.urls import reverse_lazy
-from .models import Task
-from .forms import TaskForm, TaskFilterForm
+from .models import Task, TaskImage
+from .forms import TaskForm, TaskFilterForm, TaskImageForm
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from django.urls import reverse_lazy
@@ -69,16 +69,22 @@ class TaskCreateView(LoginRequiredMixin, View):
     login_url = 'login'
     def get(self, request):
         form = TaskForm()
-        return render(request, 'task_create.html', {'form': form})
+        image_form = TaskImageForm()
+        return render(request, 'task_create.html', {'form': form, 'image_form': image_form})
 
     def post(self, request):
         form = TaskForm(request.POST, request.FILES)
-        if form.is_valid():
+        image_form = TaskImageForm(request.POST, request.FILES)
+        if form.is_valid() and image_form.is_valid():
             task = form.save(commit=False)
             task.created_by = request.user  # Assign the currently logged-in user as the creator
             task.save()
+
+            for img in request.FILES.getlist('image'):
+                TaskImage.objects.create(task=task, image=img)
+
             return redirect('task_list')
-        return render(request, 'task_create.html', {'form': form})
+        return render(request, 'task_create.html', {'form': form, 'image_form': image_form})
 
 
 class TaskUpdateView(LoginRequiredMixin, View):

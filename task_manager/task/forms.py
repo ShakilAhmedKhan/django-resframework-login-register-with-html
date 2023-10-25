@@ -1,13 +1,18 @@
 # task_manager/forms.py
 
 from django import forms
-from .models import Task
+from .models import Task, TaskImage
 
 class TaskForm(forms.ModelForm):
     class Meta:
         model = Task
-        fields = '__all__'
+        fields = ('title', 'description', 'due_date', 'priority', 'completed')
 # task_manager/forms.py
+
+class TaskImageForm(forms.ModelForm):
+    class Meta:
+        model = TaskImage
+        fields = ('image',)
 
 class TaskFilterForm(forms.Form):
     title = forms.CharField(required=False, label='Title')

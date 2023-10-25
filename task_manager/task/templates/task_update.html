@@ -1,0 +1,12 @@
+<!-- task_update.html (Task Update Template) -->
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Update Task</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Update Task</button>
+    </form>
+    <a href="{% url 'task_details' task.id %}">Back to Task Details</a>
+{% endblock %}

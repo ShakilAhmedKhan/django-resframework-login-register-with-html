@@ -1,0 +1,17 @@
+<!-- task_details.html (Task Details Template) -->
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Task Details</h2>
+    <h3>{{ task.title }}</h3>
+    <p>{{ task.description }}</p>
+    <p>Due Date: {{ task.due_date }}</p>
+    <p>Priority: {{ task.priority }}</p>
+    <p>Created By: {{ task.created_by }}</p>
+    <p>Created At: {{ task.created_at }}</p>
+    {% if task.image %}
+        <img src="{{ task.image.url }}" alt="{{ task.title }}">
+    {% endif %}
+    <a href="{% url 'task_update' task.id %}">Update Task</a>
+    <a href="{% url 'task_delete' task.id %}">Delete Task</a>
+{% endblock %}

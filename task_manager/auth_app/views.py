@@ -3,7 +3,7 @@
 from django.contrib.auth import login, authenticate, logout
 from django.shortcuts import render, redirect
 from .forms import CustomUserCreationForm, CustomUserLoginForm
-
+from django.contrib.auth.mixins import LoginRequiredMixin
 def register(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
@@ -30,7 +30,7 @@ def user_login(request):
 
 def user_logout(request):
     logout(request)
-    return redirect('index')
+    return redirect('login')
 
 def index(request):
-    return render(request, 'home.html')
+    return render(request, 'index.html')

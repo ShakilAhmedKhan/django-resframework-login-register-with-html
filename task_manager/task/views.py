@@ -73,7 +73,8 @@ class TaskCreateView(LoginRequiredMixin, View):
         return render(request, 'task_create.html', {'form': form, 'image_form': image_form})
 
     def post(self, request):
-        form = TaskForm(request.POST, request.FILES)
+        form = TaskForm(request.POST)
+        # form = TaskForm(request.POST, request.FILES)
         image_form = TaskImageForm(request.POST, request.FILES)
         if form.is_valid() and image_form.is_valid():
             task = form.save(commit=False)

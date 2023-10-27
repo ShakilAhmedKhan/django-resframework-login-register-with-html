@@ -13,43 +13,90 @@
 <!--    </ul>-->
 
 
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Task</th>
-      <th scope="col">Due Date</th>
-      <th scope="col">Priority</th>
-      <th scope="col">Image</th>
-    </tr>
-  </thead>
-  <tbody>
+<!--<table class="table">-->
+<!--  <thead>-->
+<!--    <tr>-->
+<!--      <th scope="col">#</th>-->
+<!--      <th scope="col">Task</th>-->
+<!--      <th scope="col">Due Date</th>-->
+<!--      <th scope="col">Priority</th>-->
+<!--      <th scope="col">Image</th>-->
+<!--    </tr>-->
+<!--  </thead>-->
+<!--  <tbody>-->
+<!--    {% for task in tasks %}-->
+
+
+<!--    <tr>-->
+
+
+
+<!--      <th><a href="{% url 'task_details' task.id %}">{{ forloop.counter }}</a>-->
+<!--      <th scope="row"> {{ task.title }} </th>-->
+<!--      <td colspan="2">{{ task.due_date }}</td>-->
+<!--      <td>{{ task.priority }}</td>-->
+<!--      <td>{{ task.priority }}</td>-->
+<!--      <td>-->
+<!--&lt;!&ndash;      {% if task.image %}&ndash;&gt;-->
+<!--&lt;!&ndash;        <img src="{{ task.image.url }}" alt="{{ task.title }}">&ndash;&gt;-->
+<!--&lt;!&ndash;      {% endif %}&ndash;&gt;-->
+<!--        {% if task.image %}-->
+<!--  <div style="width: 200px; height: 100px; overflow: hidden;">-->
+<!--    <img src="{{ task.image.url }}" alt="{{ task.title }}" style="width: 100%; height: 100%;">-->
+<!--  </div>-->
+<!--{% endif %}-->
+<!--        </td>-->
+
+
+
+<!--      </td>-->
+<!--    </tr>-->
+<!--   {% endfor %}-->
+<!--  </tbody>-->
+<!--</table>-->
+
+
+
+<table class="table mt-5">
+  <tr>
+    <th>SN</th>
+    <th>Task</th>
+    <th>Due Date</th>
+    <th>Priority</th>
+    <th>Images</th>
+    <th>Actions</th>
+  </tr>
+
     {% for task in tasks %}
+  <tr>
 
+    <td><a href="{% url 'task_details' task.id %}">{{ forloop.counter }}</a></td>
+    <td>{{task.title}}</td>
+    <td>{{task.due_date}}</td>
+    <td>{{task.priority}}</td>
+                <td>
+                    {% for task_image in task.images.all %}
+                        <img src="{{task_image.image.url }}" alt="{{ task.title }} Image" style="max-width: 100px;">
+                    {% empty %}
+                        No images available
+                    {% endfor %}
+                </td>
 
-    <tr>
+    <td> <a href="/delete_recipe/{{recipe.id}}/" class="btn btn-danger"> Delete </a>
+        <br>
+        <a href="/edit_recipe/{{recipe.id}}/" class="btn btn-success"> Edit </a>
+    </td>
+  </tr>
 
-
-
-      <th><a href="{% url 'task_details' task.id %}">{{ forloop.counter }}</a>
-      <th scope="row"> {{ task.title }} </th>
-      <td colspan="2">{{ task.due_date }}</td>
-      <td>{{ task.priority }}</td>
-      <td>{{ task.priority }}</td>
-      <td>
-<!--      {% if task.image %}-->
-<!--        <img src="{{ task.image.url }}" alt="{{ task.title }}">-->
-<!--      {% endif %}-->
-        {% if task.image %}
-  <div style="width: 200px; height: 100px; overflow: hidden;">
-    <img src="{{ task.image.url }}" alt="{{ task.title }}" style="width: 100%; height: 100%;">
-  </div>
-{% endif %}
-
-
-      </td>
-    </tr>
-   {% endfor %}
-  </tbody>
+    {% endfor %}
 </table>
+
+
+
+
+
+
+
+
+
 {% endblock %}

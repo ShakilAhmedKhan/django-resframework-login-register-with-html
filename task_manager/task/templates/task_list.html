@@ -74,13 +74,24 @@
     <td>{{task.title}}</td>
     <td>{{task.due_date}}</td>
     <td>{{task.priority}}</td>
+<!--                <td>-->
+<!--                    {% for task_image in task.images.all %}-->
+<!--                        <img src="{{task_image.image.url }}" alt="{{ task.title }} Image" style="max-width: 100px;">-->
+<!--                    {% empty %}-->
+<!--                        No images available-->
+<!--                    {% endfor %}-->
+<!--                </td>-->
+
                 <td>
-                    {% for task_image in task.images.all %}
-                        <img src="{{task_image.image.url }}" alt="{{ task.title }} Image" style="max-width: 100px;">
-                    {% empty %}
+                    {% if task.images.all %}
+                        <img src="{{ task.images.first.image.url }}" alt="{{ task.title }} Image" style="max-width: 100px; height: 100px;">
+                    {% else %}
                         No images available
-                    {% endfor %}
+                    {% endif %}
                 </td>
+
+
+
 
     <td> <a href="/delete_recipe/{{recipe.id}}/" class="btn btn-danger"> Delete </a>
         <br>

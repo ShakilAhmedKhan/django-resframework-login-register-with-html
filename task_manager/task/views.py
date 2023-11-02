@@ -26,39 +26,6 @@ class TaskListView(LoginRequiredMixin, View):
 
 
         return render(request, 'task_list.html', {'tasks': tasks})
-        # tasks = Task.objects.all()
-        # print(user.id)
-        # return render(request, 'task_list.html', {'tasks': tasks})
-
-class TaskCreateView(LoginRequiredMixin, View):
-    login_url = 'login'
-    def get(self, request):
-        form = TaskForm()
-        return render(request, 'task_create.html', {'form': form})
-
-    def post(self, request):
-        form = TaskForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return redirect('task_list')
-        return render(request, 'task_create.html', {'form': form})
-
-# Create views for task details, update, and delete similarly
-# class TaskCreateView(View):
-#     def get(self, request):
-#         form = TaskForm()
-#         return render(request, 'task_create.html', {'form': form})
-#
-#     def post(self, request):
-#         form = TaskForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             task = form.save(commit=False)
-#             task.created_by = request.user  # Assign the currently logged-in user as the creator
-#             task.save()
-#             return redirect('task_list')
-#         return render(request, 'task_create.html', {'form': form})
-
-# task_manager/views.py
 
 from django.views import View
 from django.shortcuts import render, redirect

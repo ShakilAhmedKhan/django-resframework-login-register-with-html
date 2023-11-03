@@ -6,7 +6,13 @@
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
-        {{image_form.as_p}}
+<!--        {{image_form.as_p}}-->
+
+        <div class="mb-3">
+            <label for="image" class="form-label">Image</label>
+            <input name = "image" type="file" class="form-control" id="image" multiple>
+        </div>
+
         <button type="submit">Create Task</button>
     </form>
 {% endblock %}

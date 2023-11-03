@@ -9,8 +9,10 @@
     <header>
         <h1>Task Manager</h1>
         <nav>
+            <a href="{% url 'index' %}">Home</a>
             <a href="{% url 'task_list' %}">Task List</a>
             <a href="{% url 'task_create' %}">Create Task</a>
+
         </nav>
     </header>
     <main>

@@ -7,12 +7,25 @@
 <h2>Task List of {{ user.id }}</h2>
 {% endif %}
 
+<form method="get">
+  <div class="input-group mb-3">
+    <input type="text" name="search" class="form-control" placeholder="Search by Task Name" value="{{ request.GET.search }}">
+    <div class="input-group-append">
+      <button class="btn btn-primary" type="submit">Search</button>
+    </div>
+  </div>
+</form>
+<br>
+
 <table class="table mt-5">
   <tr>
     <th>SN</th>
-    <th>Task</th>
-    <th>Due Date</th>
-    <th>Priority</th>
+<!--    <th>Task</th>-->
+<!--    <th>Due Date</th>-->
+<!--    <th>Priority</th>-->
+    <th><a href="?sort=priority">Task</a></th>
+    <th><a href="?sort=due_date">Due Date</a></th>
+    <th><a href="?sort=priority">Priority</a></th>
     <th>Images</th>
     <th>Actions</th>
   </tr>

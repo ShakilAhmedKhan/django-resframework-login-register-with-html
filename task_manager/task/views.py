@@ -1,5 +1,6 @@
 # task_manager/views.py
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 from django.shortcuts import render, redirect
 from django.views import View
 from django.urls import reverse_lazy
@@ -23,6 +24,19 @@ class TaskListView(LoginRequiredMixin, View):
         # print(user.id)
         # tasks = Task.objects.filter(created_by=user.id)
         tasks = Task.objects.filter(created_by=user)
+
+        # Sorting tasks by priority or due date
+        sort_param = request.GET.get('sort', None)
+        if sort_param == 'priority':
+            tasks = tasks.order_by('priority')
+        elif sort_param == 'due_date':
+            tasks = tasks.order_by('due_date')
+
+        # Searching tasks by name
+        search_param = request.GET.get('search', None)
+        if search_param:
+            tasks = tasks.filter(Q(title__icontains=search_param))
+
 
 
         return render(request, 'task_list.html', {'tasks': tasks})
